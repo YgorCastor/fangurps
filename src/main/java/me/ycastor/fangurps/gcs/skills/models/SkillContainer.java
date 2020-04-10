@@ -8,11 +8,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class SkillContainer {
     private String name;
-    private Vector<Skill> skill;
+    @Builder.Default
+    private Vector<Skill> skill = Vector.empty();
 }

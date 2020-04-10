@@ -18,9 +18,12 @@ import lombok.NoArgsConstructor;
 public class SkillList {
     @JsonProperty("skill_container")
     @JacksonXmlElementWrapper(useWrapping = false)
-    private Vector<SkillContainer> skillContainer;
+    @Builder.Default
+    private Vector<SkillContainer> skillContainer = Vector.empty();
     @JacksonXmlElementWrapper(useWrapping = false)
-    private Vector<Skill> skill;
+    @Builder.Default
+    private Vector<Skill> skill = Vector.empty();
     @JacksonXmlElementWrapper(useWrapping = false)
-    private Vector<Skill> technique;
+    @Builder.Default
+    private Vector<Skill> technique = Vector.empty();
 }
