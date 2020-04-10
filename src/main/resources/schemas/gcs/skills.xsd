@@ -1,0 +1,140 @@
+<!DOCTYPE xs:schema [
+        <!ELEMENT xs:schema (xs:element)*>
+        <!ATTLIST xs:schema
+                attributeFormDefault CDATA #REQUIRED
+                elementFormDefault CDATA #REQUIRED
+                xmlns:xs CDATA #REQUIRED>
+        <!ELEMENT xs:element (xs:complexType)*>
+        <!ATTLIST xs:element
+                maxOccurs CDATA #IMPLIED
+                minOccurs CDATA #IMPLIED
+                name CDATA #REQUIRED
+                type CDATA #IMPLIED>
+        <!ELEMENT xs:complexType (xs:choice|xs:sequence|xs:attribute)*>
+        <!ELEMENT xs:choice (xs:element)*>
+        <!ATTLIST xs:choice
+                maxOccurs CDATA #REQUIRED
+                minOccurs CDATA #REQUIRED>
+        <!ELEMENT xs:sequence (xs:element)*>
+        <!ELEMENT xs:attribute (#PCDATA)>
+        <!ATTLIST xs:attribute
+                name CDATA #REQUIRED
+                type CDATA #REQUIRED
+                use CDATA #IMPLIED>
+        ]>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="skill_list">
+        <xs:complexType>
+            <xs:choice maxOccurs="unbounded" minOccurs="0">
+                <xs:element name="skill">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element type="xs:string" name="name"/>
+                            <xs:element type="xs:string" name="difficulty"/>
+                            <xs:element type="xs:byte" name="points"/>
+                            <xs:element type="xs:string" name="reference"/>
+                            <xs:element name="categories">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element type="xs:string" name="category"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="default" maxOccurs="unbounded" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element type="xs:string" name="type"/>
+                                        <xs:element type="xs:string" name="name" minOccurs="0"/>
+                                        <xs:element type="xs:string" name="specialization" minOccurs="0"/>
+                                        <xs:element type="xs:byte" name="modifier"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute type="xs:byte" name="version"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="technique">
+                    <xs:complexType>
+                        <xs:choice maxOccurs="unbounded" minOccurs="0">
+                            <xs:element type="xs:string" name="name"/>
+                            <xs:element type="xs:string" name="difficulty"/>
+                            <xs:element type="xs:byte" name="points"/>
+                            <xs:element type="xs:string" name="reference"/>
+                            <xs:element name="default">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element type="xs:string" name="type"/>
+                                        <xs:element type="xs:string" name="name" minOccurs="0"/>
+                                        <xs:element type="xs:byte" name="modifier"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="categories">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element type="xs:string" name="category" maxOccurs="unbounded" minOccurs="0"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:choice>
+                        <xs:attribute type="xs:byte" name="version" use="optional"/>
+                        <xs:attribute type="xs:byte" name="limit" use="optional"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="skill_container">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element type="xs:string" name="name"/>
+                            <xs:element name="skill" maxOccurs="unbounded" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element type="xs:string" name="name"/>
+                                        <xs:element type="xs:string" name="specialization"/>
+                                        <xs:element type="xs:string" name="difficulty"/>
+                                        <xs:element type="xs:byte" name="points"/>
+                                        <xs:element type="xs:string" name="reference"/>
+                                        <xs:element name="categories">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element type="xs:string" name="category" maxOccurs="unbounded" minOccurs="0"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute type="xs:byte" name="version" use="optional"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element type="xs:string" name="specialization" minOccurs="0"/>
+                            <xs:element type="xs:string" name="tech_level" minOccurs="0"/>
+                            <xs:element type="xs:string" name="difficulty" minOccurs="0"/>
+                            <xs:element type="xs:byte" name="points" minOccurs="0"/>
+                            <xs:element type="xs:string" name="reference" minOccurs="0"/>
+                            <xs:element name="categories" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element type="xs:string" name="category" maxOccurs="unbounded" minOccurs="0"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="default" maxOccurs="unbounded" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element type="xs:string" name="type"/>
+                                        <xs:element type="xs:string" name="name" minOccurs="0"/>
+                                        <xs:element type="xs:string" name="specialization" minOccurs="0"/>
+                                        <xs:element type="xs:byte" name="modifier"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute type="xs:byte" name="version" use="optional"/>
+                        <xs:attribute type="xs:string" name="open" use="optional"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+            <xs:attribute type="xs:string" name="id"/>
+            <xs:attribute type="xs:byte" name="version"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

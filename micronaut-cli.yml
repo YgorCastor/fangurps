@@ -1,0 +1,5 @@
+profile: cli
+defaultPackage: fangurps
+---
+testFramework: junit
+sourceLanguage: java
