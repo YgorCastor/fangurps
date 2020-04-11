@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="US-ASCII" ?>
+<skill_list id="6e39a9e0-ce15-49d8-86ba-335747726e19" version="1">
+    <skill version="3">
+        <name>Accounting</name>
+        <difficulty>IQ/H</difficulty>
+        <points>1</points>
+        <reference>B174</reference>
+        <categories>
+            <category>Business</category>
+        </categories>
+        <default>
+            <type>Skill</type>
+            <name>Mathematics</name>
+            <specialization>Statistics</specialization>
+            <modifier>-5</modifier>
+        </default>
+    </skill>
+</skill_list>
