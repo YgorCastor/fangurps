@@ -16,4 +16,8 @@ public class SkillContainer {
     private String name;
     @Builder.Default
     private Vector<Skill> skill = Vector.empty();
+
+    public void setSkill(Vector<Skill> skill) {
+        this.skill = this.skill.appendAll(skill);
+    }
 }

@@ -7,9 +7,7 @@ import lombok.NoArgsConstructor;
 import me.ycastor.fangurps.fantasygrounds.common.models.FGCategory;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
 public class FGAbility {
-    private FGCategory<FGSkillContainer> categories;
+    private FGCategory<FGSkillContainer> category;
 }

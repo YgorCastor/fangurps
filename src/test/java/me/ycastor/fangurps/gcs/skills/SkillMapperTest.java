@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Story: GCS Skill Mapping")
 class SkillMapperTest {
-    private ResourceStringReader resourceStringReader = new ResourceStringReader();
+    private final ResourceStringReader resourceStringReader = new ResourceStringReader();
 
     private SkillMapper skillMapper;
 

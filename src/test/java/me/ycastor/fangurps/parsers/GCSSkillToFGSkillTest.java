@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("Story: GCS Skill to FG Ability Converter")
 class GCSSkillToFGSkillTest {
 
-    private ResourceStringReader resourceStringReader = new ResourceStringReader();
+    private final ResourceStringReader resourceStringReader = new ResourceStringReader();
     private SkillMapper skillMapper;
     private GCSSkillToFGSkill gcsSkillToFGSkill;
 
@@ -27,7 +27,7 @@ class GCSSkillToFGSkillTest {
     @DisplayName("Scenario: Parse an GCS Skill to a Fantasy Grounds Ability")
     void parse_Successfully() {
         // Given
-        String validGcsSkillXml = resourceStringReader.read("/gcs/skill_valid_small.xml");
+        var validGcsSkillXml = resourceStringReader.read("/gcs/skill_valid_small.xml");
         var skillList = skillMapper.xmlToDomain(validGcsSkillXml);
 
         // when
@@ -36,7 +36,7 @@ class GCSSkillToFGSkillTest {
         // assert
         assertThat(result.isRight()).isTrue();
         var ability = result.get().orElse(null);
-        var categories = ability.getCategories();
+        var categories = ability.getCategory();
 
         assertThat(categories.getName()).isEqualTo("Skills");
         assertThat(categories.getBaseicon()).isEqualTo("0");
@@ -45,11 +45,12 @@ class GCSSkillToFGSkillTest {
         var fgskills = categories.getEntities();
         assertThat(fgskills).hasSize(1);
 
-        var skill = fgskills.get(0).orElse(null);
+        var skill = fgskills.get(0).orElse(null).getValue();
         assertThat(skill.getLocked().getValue()).isEqualTo(1);
         assertThat(skill.getName().getValue()).isEqualTo("Accounting");
         assertThat(skill.getOtherLevel().getValue()).isEqualTo(0);
         assertThat(skill.getOtherPoints().getValue()).isEqualTo(1);
+        assertThat(skill.getSubType().getValue()).isEqualTo("Business");
         assertThat(skill.getSkillType().getValue()).isEqualTo("IQ/H");
         assertThat(skill.getType().getValue()).isEqualTo("Skill");
         assertThat(skill.getPage().getValue()).isEqualTo("B174");

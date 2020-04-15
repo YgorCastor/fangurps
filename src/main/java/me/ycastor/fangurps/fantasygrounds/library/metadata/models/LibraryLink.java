@@ -1,20 +1,19 @@
-package me.ycastor.fangurps.fantasygrounds.metadata;
+package me.ycastor.fangurps.fantasygrounds.library.metadata.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
 public class LibraryLink {
     @JacksonXmlProperty(isAttribute = true)
     @Builder.Default
     private String type = "string";
+    @JsonProperty("class")
     private Clazz clazz;
+    @JsonProperty("recordname")
     private RecordName recordName;
 }

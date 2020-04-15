@@ -22,6 +22,7 @@ import me.ycastor.fangurps.fantasygrounds.skills.models.FGType;
 import me.ycastor.fangurps.gcs.skills.models.Default;
 import me.ycastor.fangurps.gcs.skills.models.Skill;
 import me.ycastor.fangurps.gcs.skills.models.SkillList;
+import me.ycastor.fangurps.shared.mapper.DynamicTagWrapper;
 
 @Singleton
 @Slf4j
@@ -35,9 +36,11 @@ public class GCSSkillToFGSkill implements Parser<SkillList, FGAbility> {
             var skills = source.getSkill().map(this::parseSkill);
             var techniques = source.getTechnique().map(this::parseSkill);
             var skillContainer = source.getSkillContainer().flatMap(gcsContainer -> gcsContainer.getSkill().map(this::parseSkill));
-            var allSkills = skills.appendAll(techniques).appendAll(skillContainer);
+            var allSkills = skills.appendAll(techniques)
+                                  .appendAll(skillContainer)
+                                  .map(sk -> DynamicTagWrapper.<FGSkillContainer>builder().tagName(sk.uid()).value(sk).build());
             var category = FGCategory.<FGSkillContainer>builder().entities(allSkills).name("Skills").baseicon("0").decalicon("0").build();
-            var ability = FGAbility.builder().categories(category).build();
+            var ability = FGAbility.builder().category(category).build();
 
             return Either.right(ability);
         } catch (Exception ex) {

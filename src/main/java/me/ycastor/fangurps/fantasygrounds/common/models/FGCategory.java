@@ -1,17 +1,16 @@
 package me.ycastor.fangurps.fantasygrounds.common.models;
 
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 import cyclops.data.Vector;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import me.ycastor.fangurps.shared.mapper.DynamicTagWrapper;
 
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
 public class FGCategory<T> {
     @JacksonXmlProperty(isAttribute = true)
@@ -22,5 +21,6 @@ public class FGCategory<T> {
     private String decalicon;
 
     @Builder.Default
-    private Vector<T> entities = Vector.empty();
+    @JacksonXmlElementWrapper(useWrapping = false)
+    private Vector<DynamicTagWrapper<T>> entities = Vector.empty();
 }

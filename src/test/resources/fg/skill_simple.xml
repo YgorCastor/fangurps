@@ -1,0 +1,33 @@
+<root version="3.3" release="8|CoreRPG:4">
+    <ability>
+        <category name="Skills" baseicon="0" decalicon="0">
+            <id-483574844>
+                <locked type="number">1</locked>
+                <name type="string">SKILLNAME</name>
+                <page type="string">123AB</page>
+                <type type="string">TYPE</type>
+                <otherlevel type="number">1</otherlevel>
+                <otherpoints type="number">1</otherpoints>
+                <skilldefault type="string">DEFAULT</skilldefault>
+                <skilltype type="string">SKILLTYPE</skilltype>
+                <subtype type="string">SUBTYPE</subtype>
+            </id-483574844>
+        </category>
+    </ability>
+    <library>
+        <GURPS_Skills isStatic="true">
+            <name type="string">Test Skill Set</name>
+            <entries>
+                <ability>
+                    <name type="string">Abilities</name>
+                    <librarylink type="string">
+                        <class>reference_list</class>
+                        <recordname>..</recordname>
+                    </librarylink>
+                    <recordtype type="string">ability</recordtype>
+                </ability>
+            </entries>
+            <categoryname type="string"/>
+        </GURPS_Skills>
+    </library>
+</root>
