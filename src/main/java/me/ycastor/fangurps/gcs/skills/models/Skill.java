@@ -8,57 +8,27 @@ import cyclops.control.Option;
 import cyclops.data.Vector;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
-@ToString
+@Data
 public class Skill {
-    @Getter
-    private Vector<String> categories;
+    @Builder.Default
+    private Vector<String> categories = Vector.empty();
     @JsonProperty("default")
-    @Setter
     @JacksonXmlElementWrapper(useWrapping = false)
-    private Vector<Default> aDefault;
-    @Getter
-    @Setter
+    @Builder.Default
+    private Vector<Default> aDefault = Vector.empty();
     private String difficulty;
-    @Getter
-    @Setter
     private String name;
-    @Getter
-    @Setter
     private Integer points;
-    @Setter
-    private String reference;
-    @Setter
-    private String specialization;
-    @Setter
-    private String techLevel;
-
-    public Option<String> getReference() {
-        return Option.ofNullable(reference);
-    }
-
-    public Option<String> getSpecialization() {
-        return Option.ofNullable(specialization);
-    }
-
-    public Option<String> getTechLevel() {
-        return Option.ofNullable(techLevel);
-    }
-
-    public Vector<Default> getADefault() {
-        return aDefault != null ? aDefault : Vector.empty();
-    }
-
-    public Vector<String> getCategories() {
-        return categories != null ? categories : Vector.empty();
-    }
+    @Builder.Default
+    private Option<String> reference = Option.none();
+    @Builder.Default
+    private Option<String> specialization = Option.none();
+    @Builder.Default
+    private Option<String> techLevel = Option.none();
 }
