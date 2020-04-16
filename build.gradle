@@ -1,11 +1,13 @@
 plugins {
     id "net.ltgt.apt-eclipse" version "0.21"
     id "com.github.johnrengelman.shadow" version "5.2.0"
+    id "maven-publish"
     id 'java-library'
     id "application"
+    id 'jacoco'
 }
 
-version "0.0.1-SNAPSHOT"
+version "0.1.0"
 group "fangurps"
 
 repositories {
@@ -73,6 +75,7 @@ jar {
 test {
     useJUnitPlatform()
 }
+
 tasks.withType(JavaCompile){
     options.encoding = "UTF-8"
     options.compilerArgs.add('-parameters')
@@ -85,4 +88,32 @@ shadowJar {
 tasks.withType(JavaExec) {
     classpath += configurations.developmentOnly
     jvmArgs('-XX:TieredStopAtLevel=1', '-Dcom.sun.management.jmxremote')
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/YgorCastor/fangurps")
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+                password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+            }
+        }
+    }
+    publications {
+        gpr(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
+
+jacoco {
+    toolVersion = "0.8.5"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+    }
 }
